@@ -1,16 +1,17 @@
 <script type="text/discourse-plugin" version="0.8">
-// remove ignored users on category-topic list
+// remove ignored users on desktop category-topic list
 let user = api.getCurrentUser();
+
+if(user){
 
 let ignored = user.ignored_users;
 
 if (ignored.length > 0) {
     
     window.onload = function(){
-        
         if (document.querySelector("div.column")) {
             for (var u = 0; u < ignored.length; u++) {
-                let tr = $('*[data-user-card="' + ignored[u] + '"]');
+                let tr = $('div.topic-poster[data-user-card="' + ignored[u] + '"]');
                 for (var i = 0; i < tr.length; i++) {
                     var topicTitle = tr[i].parentNode.querySelector("a span").innerText;
                     console.log('hide ' + topicTitle)
@@ -23,9 +24,8 @@ if (ignored.length > 0) {
 
     setInterval(function() {
         if (document.querySelector("table.topic-list")) {
-
             for (var u = 0; u < ignored.length; u++) {
-                let tr = $('*[data-user-card="' + ignored[u] + '"]');
+                let tr = $('td.posters a[data-user-card="' + ignored[u] + '"]:first-child');
 
                 for (var i = 0; i < tr.length; i++) {
                     var topicTitle = tr[i].parentNode.parentNode.querySelector("a span").innerText;
@@ -36,6 +36,6 @@ if (ignored.length > 0) {
         }
     }, 500);
 }
-
+}
 </script>
 
