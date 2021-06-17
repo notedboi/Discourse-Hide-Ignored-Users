@@ -1,12 +1,5 @@
 <script type="text/x-handlebars" data-template-name="components/mobile-category-topic">
 <td class="main-link" data-notification-level="{{topic.notification_level}}">
-
-{{!--
-{{#each-in topic as |t d|}}
-    <li>{{t}} : {{d}}</li>
-  {{/each-in}}
---}}
-
 <div class="topic-inset"  >
     {{raw "topic-status" topic=topic}}
     {{topic-link topic}}
@@ -67,4 +60,14 @@
     </td>
 </script>
 
+<script type='text/x-handlebars' data-template-name='list/topic-excerpt.hbr'>
+{{#if topic.hasExcerpt}}
+  <a href="{{topic.url}}" class="topic-excerpt" data-user-id="{{topic.creator.username}}">
+    {{dir-span topic.escapedExcerpt}}
+    {{#if topic.excerptTruncated}}
+      <span class="topic-excerpt-more">{{i18n 'read_more'}}</span>
+    {{/if}}
+  </a>
+{{/if}}
+</script>
 

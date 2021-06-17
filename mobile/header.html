@@ -10,6 +10,7 @@ if (ignored.length > 0) {
         if (document.querySelector("table.topic-list")) {
             for (var u = 0; u < ignored.length; u++) {
                 let tr = $('*[data-user-id="' + ignored[u] + '"]');
+                //latest 
                 if(tr && tr.length > 0){
                     for (var i = 0; i < tr.length; i++) {
                         var topicTitle = tr[i].parentNode.parentNode.querySelector("a span").innerText;
@@ -17,13 +18,22 @@ if (ignored.length > 0) {
                         tr[i].parentNode.parentNode.remove()
                     }
                 }
-                
+                //topic thumbnail grid view
                 let td = $('*[data-user-card="' + ignored[u] + '"]:first-child');
                 if(td && td.length > 0){
                     for (var i = 0; i < td.length; i++) {
                          var topicTitle = td[i].parentNode.parentNode.querySelector("a span").innerText;
                          console.log('hide ' + topicTitle)
                          td[i].parentNode.parentNode.remove()
+                    }
+                }
+                //topic excerpt view 
+                 let te = $('*[data-user-card="' + ignored[u] + '"]');
+                if(te && te.length > 0){
+                    for (var i = 0; i < te.length; i++) {
+                         var topicTitle = te[i].parentNode.querySelector("a span").innerText;
+                         console.log('hide ' + topicTitle)
+                         te[i].parentNode.parentNode.parentNode.parentNode.remove()
                     }
                 }
             }
